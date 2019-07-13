@@ -21,6 +21,10 @@ calculator = Calculator(width, height)
 best_sum = {"bitboard": 0, "succeed": 0, "failed": 0, "total": 0, "rate": 0}
 
 for i in range(0, num_of_states):
+    if i % 5000 == 0:
+        print("Progress: {}/{} ({:>3.0f}%)".format(i,
+                                                   num_of_states, i/num_of_states*100))
+
     bitboard = i
     calculator.set_red_zone(is_red_zone)
     # print("#{}".format(bitboard))
