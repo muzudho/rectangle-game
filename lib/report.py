@@ -28,16 +28,17 @@ class Report(object):
         key = new_key(x, y, x2, y2)
         self.new_item(key)
 
-    def sum_cell(self, x, y, x2, y2):
-        key = new_key(x, y, x2, y2)
-        self.sum_succeed += self.dict[key]["succeed"]
-        self.sum_failed += self.dict[key]["failed"]
-        return
-
     def sum(self, board):
         self.sum_succeed = 0
         self.sum_failed = 0
-        board.brute_force(self.sum_cell)
+
+        def sum_cell(x, y, x2, y2):
+            key = new_key(x, y, x2, y2)
+            self.sum_succeed += self.dict[key]["succeed"]
+            self.sum_failed += self.dict[key]["failed"]
+            return
+
+        board.brute_force(sum_cell)
 
         total = self.sum_succeed + self.sum_failed
 

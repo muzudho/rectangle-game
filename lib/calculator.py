@@ -24,6 +24,9 @@ class Calculator(object):
         self.board.brute_force(self.report.init_cell)
         self.board.brute_force(self.try_match_rectangle)
 
+    def get_report_sum(self):
+        return self.report.sum(self.board)
+
     def show_report(self):
         self.report.show(self.board)
 
