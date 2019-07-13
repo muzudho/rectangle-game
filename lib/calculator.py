@@ -4,16 +4,16 @@ from lib.report import Report
 
 
 class Calculator(object):
-    def __init__(self, is_red_zone):
+    def __init__(self, is_red_zone, width=19, height=19):
         self.is_red_zone = is_red_zone
         self.report = Report()
-        self.board = Board()
+        self.board = Board(width, height)
         return
 
     def calculate(self):
         self.board.brute_force(self.report.init_cell)
         self.board.brute_force(self.try_match_rectangle)
-        self.report.show()
+        self.report.show(self.board)
         return
 
     def show_table(self):

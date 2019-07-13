@@ -34,8 +34,7 @@ class Report(object):
         self.sum_failed += self.dict[key]["failed"]
         return
 
-    def show(self):
-        board = Board()
+    def show(self, board):
         self.sum_succeed = 0
         self.sum_failed = 0
         board.brute_force(self.sum_cell)
