@@ -1,6 +1,9 @@
 from lib.calculator import Calculator
 
-bitboard = 0b0000000000000000
+width = 4
+height = 4
+num_of_states = 2 ** (width*height)
+bitboard = 0
 
 
 def is_red_zone(x, y):
@@ -8,18 +11,20 @@ def is_red_zone(x, y):
     右上の足だけが踏めるマス。
     """
 
-    address = (y*4)+(x % 4)
+    address = (y*height)+(x % width)
     binary = 1 << address
     return (bitboard & binary) == binary
 
 
-calculator = Calculator(4, 4)
+calculator = Calculator(width, height)
 
 best_sum = {"bitboard": 0, "succeed": 0, "failed": 0, "total": 0, "rate": 0}
 
-for i in range(0, 65536):
+for i in range(0, num_of_states):
     bitboard = i
     calculator.set_red_zone(is_red_zone)
+    # print("#{}".format(bitboard))
+    # calculator.show_table()
     calculator.calculate()
     sum = calculator.get_report_sum()
     if best_sum["rate"] < sum["rate"]:
