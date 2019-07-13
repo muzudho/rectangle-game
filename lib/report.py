@@ -34,16 +34,28 @@ class Report(object):
         self.sum_failed += self.dict[key]["failed"]
         return
 
-    def show(self, board):
+    def sum(self, board):
         self.sum_succeed = 0
         self.sum_failed = 0
         board.brute_force(self.sum_cell)
-        print("Succeed : {}".format(self.sum_succeed))
-        print("Failed  : {}".format(self.sum_failed))
 
         total = self.sum_succeed + self.sum_failed
-        print("total   : {}".format(total))
 
+        rate = None
         if 0 < total:
             rate = (self.sum_succeed)/total
-            print("Rate    : {:>.4f}".format(rate))
+
+        return {
+            "succeed": self.sum_succeed,
+            "failed": self.sum_failed,
+            "total": total,
+            "rate": rate,
+        }
+
+    def show(self, board):
+        sum_dict = self.sum(board)
+
+        print("Succeed : {}".format(sum_dict["succeed"]))
+        print("Failed  : {}".format(sum_dict["failed"]))
+        print("total   : {}".format(sum_dict["total"]))
+        print("Rate    : {:>.4f}".format(sum_dict["rate"]))

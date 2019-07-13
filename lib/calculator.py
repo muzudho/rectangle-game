@@ -13,8 +13,9 @@ class Calculator(object):
     def calculate(self):
         self.board.brute_force(self.report.init_cell)
         self.board.brute_force(self.try_match_rectangle)
+
+    def show_report(self):
         self.report.show(self.board)
-        return
 
     def show_table(self):
         def cell_callback(x, y):
