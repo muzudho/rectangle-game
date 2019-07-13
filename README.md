@@ -1,0 +1,2 @@
+# rectangle-game
+くそげー☆（＾～＾）
