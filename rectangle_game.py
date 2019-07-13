@@ -9,7 +9,8 @@ def is_red_zone(x, y):
     return x == y
 
 
-calculator = Calculator(is_red_zone, 19, 19)
+calculator = Calculator(19, 19)
+calculator.set_red_zone(is_red_zone)
 calculator.show_table()
 calculator.calculate()
 calculator.show_report()

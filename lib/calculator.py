@@ -4,11 +4,21 @@ from lib.report import Report
 
 
 class Calculator(object):
-    def __init__(self, is_red_zone, width=19, height=19):
+    def __init__(self, width=19, height=19):
+        def is_red_zone(x, y):
+            """
+            右上の足だけが踏めるマス。
+            """
+
+            return x == y
+
         self.is_red_zone = is_red_zone
         self.report = Report()
         self.board = Board(width, height)
         return
+
+    def set_red_zone(self, is_red_zone):
+        self.is_red_zone = is_red_zone
 
     def calculate(self):
         self.board.brute_force(self.report.init_cell)
