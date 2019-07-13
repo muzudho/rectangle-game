@@ -7,23 +7,26 @@ class Calculator(object):
     def __init__(self, is_red_zone):
         self.is_red_zone = is_red_zone
         self.report = Report()
+        self.board = Board()
         return
 
     def calculate(self):
-        board = Board()
-        board.brute_force(self.report.init_cell)
-        board.brute_force(self.try_match_rectangle)
+        self.board.brute_force(self.report.init_cell)
+        self.board.brute_force(self.try_match_rectangle)
         self.report.show()
         return
 
     def show_table(self):
-        for y in reversed(range(0, 19)):
-            for x in range(0, 19):
-                if self.is_red_zone(x, y):
-                    print("[.] ", end="")
-                else:
-                    print(" .  ", end="")
+        def cell_callback(x, y):
+            if self.is_red_zone(x, y):
+                print("[.] ", end="")
+            else:
+                print(" .  ", end="")
+
+        def line_callback(x, y):
             print("")
+
+        self.board.iter(cell_callback, line_callback)
 
     def try_match_rectangle(self, x, y, x2, y2):
         """
