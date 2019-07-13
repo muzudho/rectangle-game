@@ -24,6 +24,14 @@ class Calculator(object):
         self.board.brute_force(self.report.init_cell)
         self.board.brute_force(self.try_match_rectangle)
 
+    @property
+    def board_width(self):
+        return self.board.width
+
+    @property
+    def board_height(self):
+        return self.board.height
+
     def get_report_sum(self):
         return self.report.sum(self.board)
 
@@ -54,3 +62,22 @@ class Calculator(object):
             self.report.increase_cell(key, "succeed", 1)
         else:
             self.report.increase_cell(key, "failed", 1)
+
+
+def show_bitboard(width, height, bitboard):
+    """
+    ビットボード表示をするぜ☆（＾～＾）
+    """
+
+    def is_red_zone(x, y):
+        """
+        右上の足だけが踏めるマス。
+        """
+
+        address = (y*height)+(x % width)
+        binary = 1 << address
+        return (bitboard & binary) == binary
+
+    calculator = Calculator(width, height)
+    calculator.set_red_zone(is_red_zone)
+    calculator.show_table()

@@ -4,9 +4,17 @@ class Board(object):
     """
 
     def __init__(self, width=19, height=19):
-        self.width = width
-        self.height = height
+        self._width = width
+        self._height = height
         return
+
+    @property
+    def width(self):
+        return self._width
+
+    @property
+    def height(self):
+        return self._height
 
     def brute_force(self, callback):
         """

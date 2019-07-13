@@ -1,5 +1,6 @@
 import random
 from lib.calculator import Calculator
+from lib.calculator import show_bitboard
 
 # Settings.
 width = 5
@@ -51,6 +52,7 @@ for i in range(0, try_count):
 
 # Result.
 print("Bitboard : {}".format(best_sum["bitboard"]))
+show_bitboard(width, height, best_sum["bitboard"])
 print("Succeed  : {}".format(best_sum["succeed"]))
 print("Failed   : {}".format(best_sum["failed"]))
 print("total    : {}".format(best_sum["total"]))
